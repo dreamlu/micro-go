@@ -6,22 +6,11 @@ WORKDIR /app
 #     static \
 #     yyd \
 #     /root/yyd/
-COPY conf /app/conf
+#COPY conf /app/conf
 COPY main /app/
-COPY static /app/static
-# 后台模板静态资源文件
+#COPY static /app/static
 
-EXPOSE 8006
+EXPOSE 9000
 
-CMD ["./main"]
-
-#更新Alpine的软件源为国内（清华大学）站点
-#RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main/" > /etc/apk/repositories
-#
-#RUN apk update \
-#        && apk upgrade \
-#        && apk add --no-cache bash \
-#        bash-doc \
-#        bash-completion \
-#        && rm -rf /var/cache/apk/* \
-#        && /bin/bash
+#CMD ["./main"]
+#CMD ["./main --api_address=0.0.0.0:9000 --registry=consul --api_namespace micro-go.web api --handler web"]

@@ -15,8 +15,9 @@ require (
 	github.com/lusis/slack-test v0.0.0-20190426140909-c40012f20018 // indirect
 	github.com/micro/cli v0.2.0
 	github.com/micro/go-micro v1.9.1
+	github.com/micro/go-plugins v1.2.0
 	github.com/micro/micro v1.9.1
 	github.com/nats-io/nats-server/v2 v2.0.4 // indirect
+	github.com/prometheus/client_golang v1.1.0
 	github.com/smartystreets/goconvey v0.0.0-20190731233626-505e41936337 // indirect
-	golang.org/x/exp/sumdb v0.0.2 // indirect
 )

@@ -1,7 +1,7 @@
 app:
   # dev mode
-  devMode: dev
-  port: 7777
+  devMode: prod
+  port: 9002
   # database
 #  db:
 #    maxIdleConn: 20

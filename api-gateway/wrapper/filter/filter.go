@@ -16,7 +16,7 @@ func Filter() plugin.Handler {
 			if !strings.Contains(r.URL.String(), "token") {
 				res, _ := json.Marshal(result.MapNoAuth)
 				w.Header().Add("Content-Type", "application/json")
-				_, _ = w.Write([]byte(res))
+				_, _ = w.Write(res)
 				return
 			}
 

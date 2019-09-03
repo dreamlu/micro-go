@@ -2,8 +2,8 @@ app:
   # database
   db:
     host: tcp(mysql:3306)
-    name: deercoder-gin
-    password: docker
+    name: micro-go
+    password: dreamlu
     user: root
   # redis
   redis:

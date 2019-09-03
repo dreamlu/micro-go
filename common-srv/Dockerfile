@@ -6,7 +6,7 @@ COPY conf /app/conf
 COPY main /app/
 COPY static /app/static
 
-EXPOSE 8006
+EXPOSE 9002
 
 CMD ["./main"]
 
