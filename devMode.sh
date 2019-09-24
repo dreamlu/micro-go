@@ -3,7 +3,7 @@
 # 开发模式 dev/prod
 # 此处修改模式
 # 执行该脚本
-devMode=prod
+devMode=dev
 
 # 配置文件地址
 # 修改各个模块下app.yaml文件开发模式

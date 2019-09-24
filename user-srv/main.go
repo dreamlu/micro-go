@@ -2,12 +2,12 @@
 package main
 
 import (
+	der "github.com/dreamlu/go-tool"
 	"github.com/gin-gonic/gin"
 	"github.com/hashicorp/consul/api"
 	"github.com/micro/go-micro/registry/consul"
 	"github.com/micro/go-micro/web"
 	"log"
-	"micro-go/commons/util/config"
 	"micro-go/user-srv/routers"
 	"net/http"
 )
@@ -17,15 +17,15 @@ func main() {
 	// registry
 	registry := consul.NewRegistry(consul.Config(
 		&api.Config{
-			Address: config.Config.GetString("app.consul.address"),
-			Scheme:  config.Config.GetString("app.consul.scheme"),
+			Address: der.Configger().GetString("app.consul.address"),
+			Scheme:  der.Configger().GetString("app.consul.scheme"),
 		}))
 
 	// Create service
 	service := web.NewService(
 		web.Name("micro-go.web.user-srv"),
 		web.Registry(registry),
-		web.Address(":"+config.Config.GetString("app.port")),
+		web.Address(":"+der.Configger().GetString("app.port")),
 	)
 
 	_ = service.Init()
@@ -35,9 +35,8 @@ func main() {
 	gin.SetMode(gin.DebugMode)
 	// 路由
 	router := routers.SetRouter()
-	// 后台配置
-	// 注释即可取消
-	//back.SetBack(router)
+	// out log to file
+	der.Logger().DefaultFileLog()
 	// 注册
 	service.Handle("/", http.StripPrefix("/user-srv", router))
 

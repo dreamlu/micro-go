@@ -3,7 +3,6 @@ package routers
 
 import (
 	"github.com/dreamlu/go-tool"
-	"github.com/dreamlu/go-tool/tool/result"
 	"github.com/gin-gonic/gin"
 	"micro-go/common-srv/controllers/basic"
 	"micro-go/common-srv/controllers/file"
@@ -68,7 +67,7 @@ func SetRouter() *gin.Engine {
 	return router
 }
 
-// 登录失效验证
+// 过滤器
 func Filter() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		path := c.Request.URL.String()
@@ -80,13 +79,14 @@ func Filter() gin.HandlerFunc {
 			return
 		}
 
-		if !strings.Contains(path, "login") && !strings.Contains(path, "/static/file") {
-			_, err := c.Cookie("uid") // may be use session
-			if err != nil {
-				c.Abort()
-				c.JSON(http.StatusOK, result.MapNoAuth)
-			}
-		}
+		// 其他过滤逻辑
+		//if !strings.Contains(path, "login") && !strings.Contains(path, "/static/file") {
+		//	_, err := c.Cookie("uid") // may be use session
+		//	if err != nil {
+		//		c.Abort()
+		//		c.JSON(http.StatusOK, result.MapNoAuth)
+		//	}
+		//}
 	}
 }
 

@@ -48,7 +48,7 @@ func SetRouter() *gin.Engine {
 			user.GET("/id", controllers.GetById)
 			user.DELETE("/delete/:id", controllers.Delete)
 			user.POST("/create", controllers.Create)
-			user.PATCH("/update", controllers.Update)
+			user.PUT("/update", controllers.Update)
 		}
 	}
 	//不存在路由

@@ -5,7 +5,6 @@ import (
 	"github.com/dreamlu/go-tool"
 	"github.com/dreamlu/go-tool/tool/result"
 	"github.com/gin-gonic/gin"
-	"micro-go/commons/util/config"
 	"net/http"
 	"runtime"
 )
@@ -22,8 +21,8 @@ type Basic struct {
 
 func GetBasicInfo(u *gin.Context) {
 	var basic Basic
-	basic.Address = config.Config.GetString("app.domain")
-	basic.Port = config.Config.GetString("app.port")
+	basic.Address = der.Configger().GetString("app.domain")
+	basic.Port = der.Configger().GetString("app.port")
 	basic.Os = runtime.GOOS
 	basic.Goversion = runtime.Version()
 	basic.Ginversion = gin.Version

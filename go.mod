@@ -7,7 +7,7 @@ require (
 	github.com/casbin/casbin v1.9.1
 	github.com/chzyer/logex v1.1.10 // indirect
 	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
-	github.com/dreamlu/go-tool v1.2.4
+	github.com/dreamlu/go-tool v1.3.2
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/hashicorp/consul/api v1.2.0
@@ -18,6 +18,5 @@ require (
 	github.com/micro/go-plugins v1.2.0
 	github.com/micro/micro v1.9.1
 	github.com/nats-io/nats-server/v2 v2.0.4 // indirect
-	github.com/prometheus/client_golang v1.1.0
 	github.com/smartystreets/goconvey v0.0.0-20190731233626-505e41936337 // indirect
 )

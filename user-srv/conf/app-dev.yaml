@@ -12,3 +12,5 @@ app:
   # consul
   consul:
     address: 127.0.0.1:8500
+  log:
+    level: debug
