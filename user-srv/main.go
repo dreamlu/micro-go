@@ -39,6 +39,22 @@ func main() {
 	der.Logger().DefaultFileLog()
 	// 注册
 	service.Handle("/", http.StripPrefix("/user-srv", router))
+	//service.Handle("/", hystrix.BreakerWrapper(http.StripPrefix("/user-srv", router)))
+
+	//c := client.NewClient(
+	//	client.Selector(
+	//		selector.NewSelector(
+	//			selector.Registry(memory.NewRegistry()),
+	//		),
+	//	),
+	//)
+	//req := c.NewRequest("micro-go.web.common-srv", "basic.basic",
+	//	map[string]string{
+	//		"foo": "bar",
+	//	}, client.WithContentType("application/json"))
+	//var rsp map[string]interface{}
+	//c.Call(context.TODO(), req, rsp)
+	//log.Println(rsp)
 
 	// Run server
 	if err := service.Run(); err != nil {

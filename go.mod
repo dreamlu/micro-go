@@ -8,6 +8,7 @@ require (
 	github.com/chzyer/logex v1.1.10 // indirect
 	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
 	github.com/dreamlu/go-tool v1.3.2
+	github.com/felixge/httpsnoop v1.0.1
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/hashicorp/consul/api v1.2.0

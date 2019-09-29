@@ -6,6 +6,7 @@ app:
     password: lucheng
     # database name
     name: deercoder-gin
+    log: true
   # redis
   redis:
     host: 127.0.0.1:6379

@@ -25,3 +25,6 @@ n... todo
 | router | micro |  
 | ------ | ---- |  
 | gin | go-micro | 
+
+ps:  
+1.模块间调用: http版, 目前就是直接访问调用的方式, docker构建包会变大一些

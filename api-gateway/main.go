@@ -6,6 +6,7 @@ import (
 	"github.com/micro/micro/cmd"
 	"github.com/micro/micro/plugin"
 	"micro-go/api-gateway/wrapper/filter"
+	"micro-go/commons/wrapper/breaker"
 )
 
 // main.go
@@ -19,12 +20,25 @@ func init() {
 			plugin.WithHandler(filter.Filter()),
 		),
 	)
+	// 熔断限流
+	_ = plugin.Register(
+		plugin.NewPlugin(
+			plugin.WithName("breaker"),
+			plugin.WithHandler(breaker.BreakerWrapper),
+		),
+	)
+
 }
 
 func main() {
 
 	// PrometheusBoot()
-	cmd.Init(micro.WrapHandler(prometheus.NewHandlerWrapper()))
+	cmd.Init(
+		//micro.Name("micro-go.web.api-gateway"),
+		micro.WrapHandler(prometheus.NewHandlerWrapper()),
+		//micro.WrapClient(micro_hystrix.NewClientWrapper()),
+	)
+
 }
 
 // 访问打印出prometheus中go相关参数和含义
