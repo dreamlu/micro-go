@@ -2,11 +2,11 @@
 package main
 
 import (
-	der "github.com/dreamlu/go-tool"
+	gt "github.com/dreamlu/go-tool"
 	"github.com/gin-gonic/gin"
-	"github.com/hashicorp/consul/api"
-	"github.com/micro/go-micro/registry/consul"
+	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/web"
+	"github.com/micro/go-plugins/registry/consul"
 	"log"
 	"micro-go/common-srv/routers"
 	"net/http"
@@ -14,17 +14,15 @@ import (
 
 func main() {
 	// registry
-	registry := consul.NewRegistry(consul.Config(
-		&api.Config{
-			Address: der.Configger().GetString("app.consul.address"),
-			Scheme:  der.Configger().GetString("app.consul.scheme"),
-		}))
+	reg := consul.NewRegistry(
+		registry.Addrs(gt.Configger().GetString("app.consul.address")),
+	)
 
 	// Create service
 	service := web.NewService(
 		web.Name("micro-go.web.common-srv"),
-		web.Registry(registry),
-		web.Address(":"+der.Configger().GetString("app.port")),
+		web.Registry(reg),
+		web.Address(":"+gt.Configger().GetString("app.port")),
 	)
 
 	_ = service.Init()

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: api-gateway-ingress  # -svc
+  annotations:
+    # use the shared ingress-nginx
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    #- host: nginx-svc.me
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: api-gateway
+              servicePort: 8009

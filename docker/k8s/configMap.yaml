@@ -1,0 +1,7 @@
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: micro-go-config
+#data:
+#  image: /
+#    version 0.1

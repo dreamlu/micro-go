@@ -15,7 +15,7 @@ func SetRouter() *gin.Engine {
 	// gin.DisableConsoleColor()
 	//router := gin.Default()
 	router := gin.New()
-	der.MaxUploadMemory = router.MaxMultipartMemory
+	gt.MaxUploadMemory = router.MaxMultipartMemory
 	//router.Use(CorsMiddleware())
 
 	// 过滤器

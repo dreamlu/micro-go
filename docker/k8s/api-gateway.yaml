@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-dep
+  labels:
+    app: api-gateway-dep
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: api-gateway-dep
+      labels:
+        app: api-gateway-dep
+    spec:
+      containers:
+        - args:
+            - ./main
+            - --server_name=micro-go.web.api-gateway
+            - --api_address=0.0.0.0:9000
+            - --registry_address=consul
+            - --registry=consul
+            - --api_namespace=micro-go.web
+            - api
+            - --handler=web
+          name: api-gateway-dep
+          image: registry.gitlab.com/dreamlu/micro-go/api-gateway:0.2
+          #command: ["./main"]
+          imagePullPolicy: Always
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: api-gateway-dep
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-svc
+spec:
+  selector:
+    app: api-gateway-dep
+  ports:
+    - port: 9000
+  #type: NodePort

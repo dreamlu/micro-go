@@ -1,0 +1,84 @@
+# docker-compose
+# author: dreamlu
+# github.com/dreamlu
+version: '3'
+services:
+  # mysql-server
+  mysql:
+    image: mysql:8.0
+    #command:
+    #privileged: true
+    container_name: d-mysql
+    #image: mysql/mysql-server:5.7
+    #image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: micro-go
+      MYSQL_USER: dreamlu
+      MYSQL_PASSWORD: dreamlu
+      MYSQL_ROOT_PASSWORD: dreamlu
+      MYSQL_ROOT_HOST: '%'
+      TZ: Asia/Shanghai
+    ports:
+      - 3308:3306
+    restart: always
+    # sql备份目录
+    volumes:
+      - /home/ubuntu/dreamlu/bak:/bak
+    #expose:
+    #  - 3308
+  # redis
+  redis:
+    image: redis:4.0
+    ports:
+      - 6378:6379
+    container_name: d-redis
+    restart: always
+  # consul
+  consul:
+    image: consul
+    ports:
+      - 8300:8300
+      - 8301:8301
+      - 8301:8301/udp
+      - 8302:8302
+      - 8302:8302/udp
+      - 8400:8400
+      - 8500:8500
+      - 54:53/udp
+    container_name: d-consul
+    restart: always
+  # api gateway
+  api-gateway:
+    image: registry.cn-hangzhou.aliyuncs.com/dreamlu/common:micro-go-api-gateway
+    ports:
+      - 9000:9000
+    container_name: d-api
+    restart: always
+    command: ./main --server_name micro-go.web.api-gateway --api_address=0.0.0.0:9000 --registry=consul --api_namespace micro-go.web api --handler web
+  # user service
+  user-srv:
+    image: registry.cn-hangzhou.aliyuncs.com/dreamlu/common:micro-go-user-srv
+    ports:
+      - 9001:9001
+    container_name: d-user
+    restart: always
+  # chat service
+  common-srv:
+    image: registry.cn-hangzhou.aliyuncs.com/dreamlu/common:micro-go-common-srv
+    ports:
+      - 9002:9002
+    container_name: d-common
+    restart: always
+  # prometheus
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    container_name: d-prometheus
+    restart: always
+  grafana:
+    image: grafana/grafana
+    container_name: d-grafana
+    ports:
+      - 3000:3000
+    restart: always

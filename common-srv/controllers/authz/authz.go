@@ -43,7 +43,7 @@ func (a *BasicAuthorizer) GetUserName(r *http.Request) string {
 	}
 	ss, _ := url.QueryUnescape(cookie.Value)
 	// 解密
-	role_id := der.AesDe(ss)
+	role_id := gt.AesDe(ss)
 	//if err != nil {
 	//	fmt.Println("cookie解密失败: ", err)
 	//	return "-1"

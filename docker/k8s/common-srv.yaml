@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: common-srv-dep
+  labels:
+    app: common-srv-dep
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: common-srv-dep
+      labels:
+        app: common-srv-dep
+    spec:
+      containers:
+        - name: common-srv-dep
+          image: registry.gitlab.com/dreamlu/micro-go/common-srv:0.2
+          imagePullPolicy: Always
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: common-srv-dep
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: common-srv-svc
+spec:
+  selector:
+    app: common-srv-dep
+  ports:
+    - port: 9002
+  #type: NodePort

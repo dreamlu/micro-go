@@ -2,7 +2,7 @@
 package models
 
 import (
-	der "github.com/dreamlu/go-tool"
+	gt "github.com/dreamlu/go-tool"
 	"github.com/dreamlu/go-tool/tool/result"
 	time2 "github.com/dreamlu/go-tool/tool/type/time"
 	"time"
@@ -15,22 +15,21 @@ type User struct {
 	Createtime time2.CTime `json:"createtime"` //maybe you like CDate
 }
 
-var crud = der.NewCrud(
-	&der.CrudParam{
-		Model: User{}, // model
-		Table: "user", // table name
-	})
+var crud = gt.NewCrud(
+	gt.Model(User{}),
+	gt.Table("user"),
+)
 
 // get user, by id
 func (c *User) GetByID(id string) interface{} {
 
 	var user User // not use *User
-	crud.Param().ModelData = &user
+	crud.Params(gt.ModelData(&user))
 	if err := crud.GetByID(id); err != nil {
-		der.Logger().Error(err.Error())
+		gt.Logger().Error(err.Error())
 		return result.GetError(err.Error())
 	}
-	der.Logger().Info("测试", crud.Param())
+	gt.Logger().Info("测试", crud.Params())
 	return result.GetSuccess(user)
 }
 
@@ -38,11 +37,11 @@ func (c *User) GetByID(id string) interface{} {
 // clientPage 1, everyPage 10 default
 func (c *User) GetBySearch(params map[string][]string) interface{} {
 	var users []*User
-	crud.Param().ModelData = &users
+	crud.Params(gt.ModelData(&users))
 
 	pager, err := crud.GetBySearch(params)
 	if err != nil {
-		der.Logger().Error(err.Error())
+		gt.Logger().Error(err.Error())
 		return result.GetError(err)
 	}
 	return result.GetSuccessPager(users, pager)
@@ -52,7 +51,7 @@ func (c *User) GetBySearch(params map[string][]string) interface{} {
 func (c *User) Delete(id string) interface{} {
 
 	if err := crud.Delete(id); err != nil {
-		der.Logger().Error(err.Error())
+		gt.Logger().Error(err.Error())
 		return result.GetError(err)
 	}
 	return result.GetMapData(result.CodeDelete, result.MsgDelete)
@@ -62,7 +61,7 @@ func (c *User) Delete(id string) interface{} {
 func (c *User) Update(data *User) interface{} {
 
 	if err := crud.Update(data); err != nil {
-		der.Logger().Error(err.Error())
+		gt.Logger().Error(err.Error())
 		return result.GetError(err)
 	}
 	return result.GetMapData(result.CodeUpdate, result.MsgUpdate)
@@ -75,7 +74,7 @@ func (c *User) Create(data *User) interface{} {
 	(*data).Createtime = time2.CTime(time.Now())
 
 	if err := crud.Create(data); err != nil {
-		der.Logger().Error(err.Error())
+		gt.Logger().Error(err.Error())
 		return result.GetError(err)
 	}
 	return result.GetMapData(result.CodeCreate, result.MsgCreate)

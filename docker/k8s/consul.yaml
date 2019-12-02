@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consul-dep
+  labels:
+    app: consul-dep
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: consul-dep
+      labels:
+        app: consul-dep
+    spec:
+      containers:
+        - name: consul-dep
+          image: consul
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: consul-dep
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: consul
+spec:
+  selector:
+    app: consul-dep
+  ports:
+    - port: 8300
+      name: consul8300
+    - port: 8301
+      name: consul8301
+    - port: 8302
+      name: consul8302
+    - port: 8400
+      name: consul8400
+    - port: 8500
+      targetPort: 8500
+      nodePort: 30850
+      name: consul8500
+    - port: 53
+      name: consul53
+      protocol: UDP
+  type: NodePort

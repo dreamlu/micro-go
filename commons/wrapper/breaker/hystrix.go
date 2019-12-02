@@ -3,7 +3,7 @@ package breaker
 import (
 	"errors"
 	"github.com/afex/hystrix-go/hystrix"
-	der "github.com/dreamlu/go-tool"
+	gt "github.com/dreamlu/go-tool"
 	"github.com/felixge/httpsnoop"
 	"log"
 	"net/http"
@@ -43,7 +43,7 @@ func BreakerWrapper(h http.Handler) http.Handler {
 			return e
 		})
 		if err != nil {
-			der.Logger().Error("hystrix breaker err: ", err)
+			gt.Logger().Error("hystrix breaker err: ", err)
 			return
 		}
 	})

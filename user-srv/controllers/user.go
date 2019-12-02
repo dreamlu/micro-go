@@ -2,7 +2,7 @@
 package controllers
 
 import (
-	der "github.com/dreamlu/go-tool"
+	gt "github.com/dreamlu/go-tool"
 	"github.com/dreamlu/go-tool/tool/xss"
 	"github.com/gin-gonic/gin"
 	"micro-go/user-srv/models"
@@ -56,7 +56,7 @@ func Create(u *gin.Context) {
 
 	// 自定义日期格式问题
 	err := u.ShouldBindJSON(&p)
-	der.Logger().Error(err)
+	gt.Logger().Error(err)
 
 	ss := p.Create(&p)
 	u.JSON(http.StatusOK, ss)

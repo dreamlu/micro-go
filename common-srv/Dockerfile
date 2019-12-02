@@ -10,7 +10,7 @@ EXPOSE 9002
 
 CMD ["./main"]
 
-#更新Alpine的软件源为国内（清华大学）站点
+#更新alpine的软件源为国内（清华大学）站点
 #RUN echo "https://mirror.tuna.tsinghua.edu.cn/alpine/v3.4/main/" > /etc/apk/repositories
 #
 #RUN apk update \

@@ -4,6 +4,7 @@
 # 此处修改模式
 # 执行该脚本
 devMode=dev
+version=0.2
 
 # 配置文件地址
 # 修改各个模块下app.yaml文件开发模式
@@ -23,5 +24,5 @@ done
 # 可注释, 通过docker.sh执行构建
 if [[ ${devMode} = 'prod' ]]; then
     echo "prod 开始构建docker"
-    ./docker.sh
+    ./docker.sh -v ${version}
 fi

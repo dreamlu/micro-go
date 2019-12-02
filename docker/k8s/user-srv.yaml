@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-srv-dep
+  labels:
+    app: user-srv-dep
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: user-srv-dep
+      labels:
+        app: user-srv-dep
+    spec:
+      containers:
+        - name: user-srv-dep
+          image: registry.gitlab.com/dreamlu/micro-go/user-srv:0.2
+          imagePullPolicy: Always
+#          envFrom:
+#            - configMapRef:
+#                name: micro-go-config
+#          env:
+#            - name: version
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: micro-go-config
+#                  key: image.version
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: user-srv-dep
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-srv-svc
+spec:
+  selector:
+    app: user-srv-dep
+  ports:
+    - port: 9001
+  #type: NodePort

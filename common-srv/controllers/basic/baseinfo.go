@@ -21,13 +21,13 @@ type Basic struct {
 
 func GetBasicInfo(u *gin.Context) {
 	var basic Basic
-	basic.Address = der.Configger().GetString("app.domain")
-	basic.Port = der.Configger().GetString("app.port")
+	basic.Address = gt.Configger().GetString("app.domain")
+	basic.Port = gt.Configger().GetString("app.port")
 	basic.Os = runtime.GOOS
 	basic.Goversion = runtime.Version()
 	basic.Ginversion = gin.Version
 	// router := routers.SetRouter()
-	basic.Maxmerory = der.MaxUploadMemory / 1024 / 1024
+	basic.Maxmerory = gt.MaxUploadMemory / 1024 / 1024
 	//db.DBTool.DB.Raw("select version() as mysql").Scan(&basic)
 
 	u.JSON(http.StatusOK, result.GetSuccess(basic))

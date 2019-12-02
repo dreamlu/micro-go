@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: mysql
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: micro-go
+        - name: MYSQL_PASSWORD
+          value: dreamlu
+        - name: MYSQL_ROOT_HOST
+          value: '%'
+        - name: MYSQL_ROOT_PASSWORD
+          value: dreamlu
+        - name: MYSQL_USER
+          value: dreamlu
+        - name: TZ
+          value: Asia/Shanghai
+        image: mysql:8.0
+        name: d-mysql
+        ports:
+        - containerPort: 3306
+        resources: {}
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: mysql
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  ports:
+    - name: "3306"
+      port: 3306
+      targetPort: 3306
+      nodePort: 30306
+  selector:
+    app: mysql
+  type: NodePort

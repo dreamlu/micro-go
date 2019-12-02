@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/micro/go-micro"
+	_ "github.com/micro/go-plugins/registry/consul"
 	"github.com/micro/go-plugins/wrapper/monitoring/prometheus"
 	"github.com/micro/micro/cmd"
 	"github.com/micro/micro/plugin"
