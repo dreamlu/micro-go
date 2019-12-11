@@ -29,6 +29,7 @@ do
     esac
 done
 docker build -f ./Dockerfile -t registry.gitlab.com/dreamlu/micro-go/api-gateway:${version} .
+docker tag registry.gitlab.com/dreamlu/micro-go/api-gateway:${version} registry.gitlab.com/dreamlu/micro-go/api-gateway:latest
 
 # remove build
 rm -rf main

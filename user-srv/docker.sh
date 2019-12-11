@@ -30,6 +30,7 @@ do
     esac
 done
 docker build -f ./Dockerfile -t registry.gitlab.com/dreamlu/micro-go/user-srv:${version} .
+docker tag registry.gitlab.com/dreamlu/micro-go/user-srv:${version} registry.gitlab.com/dreamlu/micro-go/user-srv:latest
 
 # remove build
 rm -rf main

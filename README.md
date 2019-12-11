@@ -15,7 +15,7 @@ websocket IM
 6.稳定地运行在一个业务上 todo  
 7.稳定地运行在一个大型业务上 todo  
 8.备份、容灾、监控、熔断等等 todo  
-9.发布回滚 todo  
+9.发布回滚,无缝更新[配合k8s]  
 n... todo  
 
 - [已实现api在线预览](https://www.eolinker.com/#/share/index?shareCode=7Wl9J7)
