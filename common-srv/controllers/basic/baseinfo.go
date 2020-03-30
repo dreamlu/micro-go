@@ -2,8 +2,9 @@
 package basic
 
 import (
-	"github.com/dreamlu/go-tool"
-	"github.com/dreamlu/go-tool/tool/result"
+	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/result"
+	"github.com/dreamlu/gt/tool/util/str"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"runtime"
@@ -16,7 +17,7 @@ type Basic struct {
 	Goversion  string `json:"goversion"`  //go 版本
 	Ginversion string `json:"ginversion"` //gin 版本
 	//Mysql      string `json:"mysql"`      //mysql版本
-	Maxmerory  int64  `json:"maxmerory"`  //最大上传文件大小MB
+	Maxmerory int64 `json:"maxmerory"` //最大上传文件大小MB
 }
 
 func GetBasicInfo(u *gin.Context) {
@@ -27,7 +28,7 @@ func GetBasicInfo(u *gin.Context) {
 	basic.Goversion = runtime.Version()
 	basic.Ginversion = gin.Version
 	// router := routers.SetRouter()
-	basic.Maxmerory = gt.MaxUploadMemory / 1024 / 1024
+	basic.Maxmerory = str.MaxUploadMemory / 1024 / 1024
 	//db.DBTool.DB.Raw("select version() as mysql").Scan(&basic)
 
 	u.JSON(http.StatusOK, result.GetSuccess(basic))

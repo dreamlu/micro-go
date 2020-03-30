@@ -3,7 +3,7 @@ package breaker
 import (
 	"errors"
 	"github.com/afex/hystrix-go/hystrix"
-	gt "github.com/dreamlu/go-tool"
+	"github.com/dreamlu/gt"
 	"github.com/felixge/httpsnoop"
 	"log"
 	"net/http"

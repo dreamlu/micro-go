@@ -2,7 +2,7 @@
 package routers
 
 import (
-	"github.com/dreamlu/go-tool"
+	"github.com/dreamlu/gt/tool/util/str"
 	"github.com/gin-gonic/gin"
 	"micro-go/user-srv/controllers"
 	"net/http"
@@ -13,7 +13,7 @@ func SetRouter() *gin.Engine {
 	// gin.DisableConsoleColor()
 	//router := gin.Default()
 	router := gin.New()
-	gt.MaxUploadMemory = router.MaxMultipartMemory
+	str.MaxUploadMemory = router.MaxMultipartMemory
 	//router.Use(CorsMiddleware())
 
 	// 过滤器
@@ -45,7 +45,7 @@ func SetRouter() *gin.Engine {
 		{
 			// json
 			user.GET("/search", controllers.GetBySearch)
-			user.GET("/id", controllers.GetById)
+			user.GET("/id", controllers.GetByID)
 			user.DELETE("/delete/:id", controllers.Delete)
 			user.POST("/create", controllers.Create)
 			user.PUT("/update", controllers.Update)

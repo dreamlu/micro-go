@@ -2,7 +2,7 @@
 package main
 
 import (
-	"github.com/dreamlu/go-tool"
+	"github.com/dreamlu/gt"
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-micro/registry"
 	"github.com/micro/go-micro/web"
