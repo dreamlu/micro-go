@@ -1,0 +1,19 @@
+app:
+  # redis
+  redis:
+    dB: 0
+    addr: redis:6379
+    poolSize: 0
+    minIdleConns: 0
+    #password:
+  # consul
+  consul:
+    address: consul:8500
+  log:
+    #    const (
+    #    Debug = "debug" // default, print all >= 'debug' level to file
+    #    Info  = "info"
+    #    Warn  = "warn"
+    #    Error = "error"
+    #    )
+    level: error

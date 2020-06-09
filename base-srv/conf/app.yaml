@@ -1,0 +1,12 @@
+app:
+  # dev mode
+  devMode: dev
+  port: 8013
+  # database
+  db:
+    name: micro-go
+    maxIdleConn: 20
+    maxOpenConn: 100
+  # upload filepath
+  filepath: static/file/
+  staticpath: static/

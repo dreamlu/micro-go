@@ -1,13 +1,9 @@
-FROM alpine
+FROM registry.cn-hangzhou.aliyuncs.com/dreamlu/alpine
 MAINTAINER dreamlu <862362681@qq.com>
 
-WORKDIR /app
-#COPY conf \
-#     static \
-#     yyd \
-#     /root/yyd/
-#COPY conf /app/conf
-COPY main /app/
+WORKDIR /
+COPY conf /conf
+COPY main /
 #COPY static /app/static
 
 EXPOSE 9000

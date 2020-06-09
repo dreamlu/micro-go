@@ -14,5 +14,5 @@ n...
 - 问题  
 1.启动顺序待完善  
 2.docker-compose up -d mysql,后台运行  
-3.docker-compose up demo, 运行demo, 查看请求结果  
+3.docker-compose up micro-go, 运行micro-go, 查看请求结果  
 4.other待完善  

@@ -1,0 +1,95 @@
+{
+  "description": "项目配置文件",
+  "pack_options": null,
+  "setting": {
+    "autoAudits": false,
+    "babelSetting": {
+      "disablePlugins": [],
+      "ignore": [],
+      "outputPath": ""
+    },
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "coverView": true,
+    "es6": false,
+    "minified": false,
+    "newFeature": true,
+    "postcss": false,
+    "preloadBackgroundData": false,
+    "scopeDataCheck": false,
+    "showShadowRootInWxmlPanel": false,
+    "uploadWithSourceMap": true,
+    "urlCheck": true
+  },
+  "compile_type": null,
+  "lib_version": null,
+  "appid": "wx060db152c4cc2fa3",
+  "projectname": "miniprogram-1",
+  "cloudfunction_template_root": null,
+  "watch_options": null,
+  "debug_options": null,
+  "scripts": {},
+  "simulator_type": null,
+  "simulator_plugin_lib_version": null,
+  "condition": {
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": -1,
+          "name": "pages/detail",
+          "pathName": "pages/detail",
+          "query": "id=56",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "subPackages/day-sign/pages/index",
+          "pathName": "subPackages/day-sign/pages/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "pages/user-center/refund",
+          "pathName": "pages/user-center/refund",
+          "query": "id=42",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "subPackages/day-sign/pages/edit",
+          "pathName": "subPackages/day-sign/pages/edit",
+          "query": "id=1",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "subPackages/day-sign/pages/edit",
+          "pathName": "subPackages/day-sign/pages/edit",
+          "query": "id=1",
+          "scene": null
+        }
+      ]
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "search": {
+      "current": -1,
+      "list": []
+    }
+  }
+}

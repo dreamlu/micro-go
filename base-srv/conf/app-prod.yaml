@@ -1,0 +1,25 @@
+app:
+  notifyUrl: https://yourdomain.com/api/v1/base-srv/wx/notify
+  # database
+  db:
+    host: tcp(mysql:3306)
+    password: wobangkj
+    user: root
+  # redis
+  redis:
+    dB: 0
+    addr: redis:6379
+    poolSize: 0
+    minIdleConns: 0
+    #password:
+  # consul
+  consul:
+    address: consul:8500
+  log:
+    #    const (
+    #    Debug = "debug" // default, print all >= 'debug' level to file
+    #    Info  = "info"
+    #    Warn  = "warn"
+    #    Error = "error"
+    #    )
+    level: error

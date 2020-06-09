@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: base-srv-dep
+  labels:
+    app: base-srv-dep
+spec:
+  replicas: 2
+  # 回滚rollout记录历史数量, 默认2
+  revisionHistoryLimit: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # 最多有几个 pod 处于无法工作的状态，默认值是25%
+      maxUnavailable: 1
+      # 滚动升级时会先启动2个pod
+      maxSurge: 2
+  # 等待容器启动的时间,默认值是 0,单位是：秒,容器运行成功之后直接执行下一步
+  # 根据应用启动时间,设定相应的minReadySeconds,保证应用不中断,
+  minReadySeconds: 4
+  template:
+    metadata:
+      name: base-srv-dep
+      labels:
+        app: base-srv-dep
+    spec:
+      containers:
+        - name: base-srv-dep
+          image: registry.gitlab.com/dreamlu/micro-go/base-srv:0.2
+          imagePullPolicy: Always
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: base-srv-dep
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: base-srv-svc
+spec:
+  selector:
+    app: base-srv-dep
+  ports:
+    - port: 9002
+  #type: NodePort
