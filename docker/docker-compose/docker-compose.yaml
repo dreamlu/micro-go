@@ -52,7 +52,7 @@ services:
     ports:
       - 9000:9000
     restart: always
-    command: ./main --server_name api-gateway api --address=0.0.0.0:9000 --namespace=micro.api --handler=http
+    command: ./main --server_name api-gateway api --address=0.0.0.0:9000 --namespace=micro-go.api --handler=http
     networks:
       - micro-go
   # base micro-go service
@@ -65,6 +65,21 @@ services:
       - /root/micro-go/bak/log:/log
     networks:
       - micro-go
+  # 监控
+  cadvisor:
+    image: google/cadvisor:latest
+    ports:
+    - 8080:8080
+    restart: always
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    networks:
+      - micro-go
+
 networks:
   micro-go:
     driver: bridge
