@@ -14,6 +14,7 @@ func init() {
 	// 总结一下，即在单位时间内如果调用次数超过20次，且错误率超过50%就触发熔断
 	hystrix.DefaultVolumeThreshold = 1000     //0
 	hystrix.DefaultErrorPercentThreshold = 50 //0
+	hystrix.DefaultTimeout = 3000 // 模块间请求超时时间
 	//cl :=  micro_hystrix.NewClientWrapper()(client.DefaultClient)
 }
 

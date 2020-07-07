@@ -35,14 +35,8 @@ services:
   consul:
     image: consul
     ports:
-      - 8300:8300
-      - 8301:8301
-      - 8301:8301/udp
-      - 8302:8302
-      - 8302:8302/udp
-      - 8400:8400
-      - 8500:8500
-      - 54:53/udp
+      - 8501:8500
+      - 55:53/udp
     restart: always
     networks:
       - micro-go
@@ -66,17 +60,49 @@ services:
     networks:
       - micro-go
   # 监控
-  cadvisor:
-    image: google/cadvisor:latest
+#  cadvisor:
+#    image: google/cadvisor:latest
+#    ports:
+#      - 8080:8080
+#    restart: always
+#    volumes:
+#      - /:/rootfs:ro
+#      - /var/run:/var/run:rw
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#      - /dev/disk/:/dev/disk:ro
+#    networks:
+#      - micro-go
+
+  # nsq 消息中间件
+  nsqlookupd:
+    image: nsqio/nsq:v1.2.0
+    command: /nsqlookupd
     ports:
-    - 8080:8080
-    restart: always
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
+      - 4160:4160
+      - 4161:4161
+    networks:
+      - micro-go
+  nsqd:
+    image: nsqio/nsq:v1.2.0
+    command: /nsqd --lookupd-tcp-address=nsqlookupd:4160 --data-path=/data
+    #    depends_on:
+    #      - nsqlookupd
+    ports:
+      - 4150:4150
+      - 4151:4151
+    networks:
+      - micro-go
+    # 暂弃
+    #    volumes:
+    #      - /data/nsq:/data
+  nsqadmin:
+    image: nsqio/nsq:v1.2.0
+    command: /nsqadmin --lookupd-http-address=nsqlookupd:4161
+    #    depends_on:
+    #      - nsqlookupd
+    ports:
+      - 4171:4171
     networks:
       - micro-go
 

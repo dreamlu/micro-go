@@ -6,8 +6,8 @@ require (
 	github.com/360EntSecGroup-Skylar/excelize/v2 v2.2.0
 	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5
 	github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20190808125512-07798873deee
-	github.com/dreamlu/gt v1.8.4
-	github.com/gin-gonic/gin v1.6.2
+	github.com/dreamlu/gt v1.8.13
+	github.com/gin-gonic/gin v1.6.3
 	github.com/gogo/protobuf v1.2.2-0.20190723190241-65acae22fc9d // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
 	github.com/hashicorp/go-rootcerts v1.0.1 // indirect

@@ -1,7 +1,9 @@
 package filter
 
 import (
+	"crypto/md5"
 	"encoding/json"
+	"fmt"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/cache"
 	"github.com/dreamlu/gt/tool/result"
@@ -55,6 +57,19 @@ func Filter() plugin.Handler {
 				}
 				// 延长token对应时间
 				_ = ca.Set(token, cam)
+
+				// 重复点击
+				switch r.Method {
+				case "POST", "PATCH":
+					b := check(token, path)
+					if !b {
+						res, _ := json.Marshal(result.GetMapData(result.CodeText, "点击太快啦"))
+						w.Header().Add("Content-Type", "application/json")
+						_, _ = w.Write(res)
+						return
+					}
+				}
+
 				h.ServeHTTP(w, r)
 				return
 			}
@@ -64,4 +79,42 @@ func Filter() plugin.Handler {
 			return
 		})
 	}
+}
+
+// 重复请求全局验证
+func check(token, path string) bool {
+
+	// 白名单
+	if b := white(path); b {
+		return true
+	}
+	// 判断重复下单:redis
+	key := token + path
+	// md5加密缩短长度key
+	has := md5.Sum([]byte(key))
+	key = strings.ToUpper(fmt.Sprintf("%x", has))
+
+	ce := cache.NewCache()
+	ca, _ := ce.Get(key)
+	if ca.Data == nil {
+		ca.Data = 1
+		ca.Time = 2 * cache.CacheSecond
+		_ = ce.Set(key, ca)
+		//return nil
+	} else {
+		return false
+	}
+	return true
+}
+
+// 白名单
+func white(path string) bool {
+	switch {
+	case strings.Contains(path, "/cart/create"):
+		return true
+	}
+	if strings.Contains(path, "/upload") {
+		return true
+	}
+	return false
 }

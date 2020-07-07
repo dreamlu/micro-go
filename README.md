@@ -12,10 +12,11 @@ micro-go
 3.[个人]业务中常用接口  
 4.[docker-compose](docker/docker-compose/docker-compose.yaml)  
 5.[k8s](docker/k8s/)[多注册多节点有待增加]  
-6.稳定地运行在一个业务上 
+6.稳定地运行在一个业务上  
 7.稳定地运行在一个大型业务上 todo  
-8.备份、容灾、监控、熔断等等 todo  
+8.备份、容灾、熔断等等 todo  
 9.发布回滚,无缝更新[配合k8s]  
+10.[监控(初步)](docker/monitor/README.md)  
 n... todo  
 
 线上项目如下：  
