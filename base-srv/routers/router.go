@@ -5,6 +5,7 @@ import (
 	"github.com/dreamlu/gt/tool/util/str"
 	"github.com/gin-gonic/gin"
 	"micro-go/base-srv/controllers/file"
+	recover2 "micro-go/commons/util/recover"
 	"net/http"
 	"strings"
 )
@@ -24,6 +25,7 @@ func SetRouter() *gin.Engine {
 
 	// 过滤器
 	router.Use(Filter())
+	router.Use(recover2.Recover)
 	//权限中间件
 	// load the casbin model and policy from files, database is also supported.
 	//e := casbin.NewEnforcer("conf/authz_model.conf", "conf/authz_policy.csv")
