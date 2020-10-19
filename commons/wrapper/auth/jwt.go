@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"github.com/micro/micro/v2/plugin"
+	"github.com/dreamlu/micro/v2/plugin"
 	"log"
 	"net/http"
 	"strings"

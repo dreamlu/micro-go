@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/dreamlu/go-micro/v2"
+	"github.com/dreamlu/go-micro/v2/registry"
+	"github.com/dreamlu/go-micro/v2/registry/consul"
+	"github.com/dreamlu/go-micro/v2/wrapper/monitoring/prometheus"
 	"github.com/dreamlu/gt"
-	"github.com/micro/go-micro/v2"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-plugins/registry/consul/v2"
-	"github.com/micro/go-plugins/wrapper/monitoring/prometheus/v2"
-	"github.com/micro/micro/v2/cmd"
-	"github.com/micro/micro/v2/plugin"
+	"github.com/dreamlu/micro/v2/cmd"
+	"github.com/dreamlu/micro/v2/plugin"
 	"micro-go/api-gateway/wrapper/filter"
 	"micro-go/commons/wrapper/breaker"
 )

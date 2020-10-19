@@ -2,11 +2,11 @@
 package main
 
 import (
+	"github.com/dreamlu/go-micro/v2/registry"
+	"github.com/dreamlu/go-micro/v2/registry/consul"
+	"github.com/dreamlu/go-micro/v2/web"
 	"github.com/dreamlu/gt"
 	"github.com/gin-gonic/gin"
-	"github.com/micro/go-micro/v2/registry"
-	"github.com/micro/go-micro/v2/web"
-	"github.com/micro/go-plugins/registry/consul/v2"
 	"log"
 	"micro-go/base-srv/routers"
 	"micro-go/base-srv/routers/dreamlu"

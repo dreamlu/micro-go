@@ -8,7 +8,7 @@ import (
 	"github.com/dreamlu/gt/cache"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/util/str"
-	"github.com/micro/micro/v2/plugin"
+	"github.com/dreamlu/micro/v2/plugin"
 	"log"
 	"net/http"
 	"strings"
