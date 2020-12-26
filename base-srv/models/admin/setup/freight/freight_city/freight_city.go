@@ -1,10 +1,10 @@
 package freight_city
 
 import (
+	models2 "demo/commons/models"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
-	models2 "micro-go/commons/models"
 	"strings"
 )
 
@@ -116,7 +116,7 @@ func (c *FreightCity) CreateAll(data []*FreightCityPar) ([]*FreightCityPar, erro
 		gt.Table("freight_city"),
 		gt.Data(data),
 	)
-	if err := crud.CreateMoreData().Error(); err != nil {
+	if err := crud.CreateMore().Error(); err != nil {
 		return nil, err
 	}
 	return data, nil

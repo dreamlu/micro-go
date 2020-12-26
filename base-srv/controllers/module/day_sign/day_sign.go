@@ -1,10 +1,10 @@
 package day_sign
 
 import (
+	"demo/base-srv/models/module/day_sign"
+	cm2 "demo/commons/util/cm"
 	"github.com/gin-gonic/gin"
 	"log"
-	"micro-go/base-srv/models/module/day_sign"
-	cm2 "micro-go/commons/util/cm"
 	"net/http"
 )
 

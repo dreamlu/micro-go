@@ -1,10 +1,10 @@
 package warehouse
 
 import (
+	"demo/base-srv/models/goods/warehouse"
+	"demo/commons/util/cm"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
-	"micro-go/base-srv/models/goods/warehouse"
-	"micro-go/commons/util/cm"
 	"net/http"
 )
 

@@ -1,11 +1,12 @@
 package cart
 
 import (
+	"demo/base-srv/models/goods"
+	models2 "demo/commons/models"
 	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/json"
-	"micro-go/base-srv/models/goods"
-	models2 "micro-go/commons/models"
 	"strings"
 )
 
@@ -64,7 +65,7 @@ func (c *Cart) GetBySearch(params map[string][]string) interface{} {
 		if v.IsExit == 1 {
 			gs, err := v.Goods.Goods.Get(v.GoodsID)
 			if err != nil {
-				gt.Logger().Error("[购物车查找商品详情错误]", err.Error())
+				log.Error("[购物车查找商品详情错误]", err.Error())
 				// 继续执行下一个
 			}
 			v.Goods = gs

@@ -2,12 +2,12 @@ package live_bro
 
 import (
 	"bytes"
+	"demo/base-srv/models/admin/applet"
+	"demo/base-srv/models/module/live_bro"
 	"encoding/json"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
-	"micro-go/base-srv/models/admin/applet"
-	"micro-go/base-srv/models/module/live_bro"
 	"net/http"
 )
 

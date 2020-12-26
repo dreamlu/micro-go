@@ -1,11 +1,11 @@
 package dreamlu
 
 import (
-	"micro-go/base-srv/controllers/module/day_sign"
-	"micro-go/base-srv/controllers/module/day_sign/img"
-	"micro-go/base-srv/controllers/module/day_sign/text"
-	"micro-go/base-srv/controllers/module/live_bro"
-	"micro-go/base-srv/routers"
+	"demo/base-srv/controllers/module/day_sign"
+	"demo/base-srv/controllers/module/day_sign/img"
+	"demo/base-srv/controllers/module/day_sign/text"
+	"demo/base-srv/controllers/module/live_bro"
+	"demo/base-srv/routers"
 )
 
 func ModuleRouter() {

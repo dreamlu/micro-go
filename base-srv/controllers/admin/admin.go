@@ -1,6 +1,9 @@
 package admin
 
 import (
+	"demo/base-srv/models/admin"
+	"demo/base-srv/util/models"
+	cm2 "demo/commons/util/cm"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/cache"
 	"github.com/dreamlu/gt/tool/id"
@@ -8,9 +11,6 @@ import (
 	"github.com/dreamlu/gt/tool/util"
 	"github.com/gin-gonic/gin"
 	"log"
-	"micro-go/base-srv/models/admin"
-	"micro-go/base-srv/util/models"
-	cm2 "micro-go/commons/util/cm"
 	"net/http"
 )
 

@@ -1,9 +1,9 @@
 package notice
 
 import (
+	"demo/base-srv/models/goods/notice"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
-	"micro-go/base-srv/models/goods/notice"
 	"net/http"
 )
 

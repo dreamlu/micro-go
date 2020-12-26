@@ -2,10 +2,9 @@
 package routers
 
 import (
-	"github.com/dreamlu/gt/tool/util/str"
+	"demo/base-srv/controllers/file"
+	recover2 "demo/commons/util/recover"
 	"github.com/gin-gonic/gin"
-	"micro-go/base-srv/controllers/file"
-	recover2 "micro-go/commons/util/recover"
 	"net/http"
 	"strings"
 )
@@ -20,7 +19,6 @@ func SetRouter() *gin.Engine {
 	// gin.DisableConsoleColor()
 	//router := gin.Default()
 	router := gin.New()
-	str.MaxUploadMemory = router.MaxMultipartMemory
 	//router.Use(CorsMiddleware())
 
 	// 过滤器

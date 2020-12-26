@@ -1,10 +1,10 @@
 package text
 
 import (
+	"demo/base-srv/models/module/day_sign/text"
+	cm2 "demo/commons/util/cm"
 	"github.com/gin-gonic/gin"
 	"log"
-	"micro-go/base-srv/models/module/day_sign/text"
-	cm2 "micro-go/commons/util/cm"
 	"net/http"
 )
 

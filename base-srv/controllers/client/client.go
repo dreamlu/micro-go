@@ -1,14 +1,14 @@
 package client
 
 import (
+	"demo/base-srv/models/client"
+	"demo/base-srv/util/models"
+	"demo/commons/util/cm"
 	"github.com/dreamlu/gt/cache"
 	"github.com/dreamlu/gt/tool/id"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
 	"log"
-	"micro-go/base-srv/models/client"
-	"micro-go/base-srv/util/models"
-	"micro-go/commons/util/cm"
 	"net/http"
 	"strconv"
 )

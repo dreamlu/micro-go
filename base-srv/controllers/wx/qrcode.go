@@ -1,19 +1,20 @@
 package wx
 
 import (
+	"demo/base-srv/controllers/wx/access_token"
+	"demo/base-srv/models/admin/applet"
+	"demo/commons/models"
+	"demo/commons/util/cm"
 	"fmt"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/id"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/gin-gonic/gin"
 	"github.com/medivhzhan/weapp/code"
 	"github.com/skip2/go-qrcode"
 	"io/ioutil"
-	"micro-go/base-srv/controllers/wx/access_token"
-	"micro-go/base-srv/models/admin/applet"
-	"micro-go/commons/models"
-	"micro-go/commons/util/cm"
 	"net/http"
 )
 
@@ -76,7 +77,7 @@ func GetByKey(u *gin.Context) {
 	if qc.ID != 0 && qc.Type == 1 {
 		err := cd.Select("delete from `qr_code` where id = ?", qc.ID).Exec().Error()
 		if err != nil {
-			gt.Logger().Error("二维码key删除问题", err.Error())
+			log.Error("二维码key删除问题", err.Error())
 		}
 	}
 

@@ -46,7 +46,7 @@ services:
     ports:
       - 9000:9000
     restart: always
-    command: ./main --server_name api-gateway api --address=0.0.0.0:9000 --namespace=micro-go.api --handler=http
+    command: ./main --server_name api-gateway api --address=0.0.0.0:9000 --namespace=demo.api --handler=http
     networks:
       - micro-go
   # base micro-go service

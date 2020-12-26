@@ -2,29 +2,29 @@
 package main
 
 import (
+	"demo/base-srv/routers"
+	"demo/base-srv/routers/dreamlu"
+	"demo/base-srv/util/cron"
+	dreamlu2 "demo/base-srv/util/db/dreamlu"
+	"demo/base-srv/util/pprof"
 	"github.com/dreamlu/go-micro/v2/registry"
 	"github.com/dreamlu/go-micro/v2/registry/consul"
 	"github.com/dreamlu/go-micro/v2/web"
-	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/conf"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/gin-gonic/gin"
-	"log"
-	"micro-go/base-srv/routers"
-	"micro-go/base-srv/routers/dreamlu"
-	"micro-go/base-srv/util/cron"
-	dreamlu2 "micro-go/base-srv/util/db/dreamlu"
-	"micro-go/base-srv/util/pprof"
 	"net/http"
 )
 
 func main() {
 	// registry
 	reg := consul.NewRegistry(
-		registry.Addrs(gt.Configger().GetString("app.consul.address")),
+		registry.Addrs(conf.GetString("app.consul.address")),
 	)
 
 	// Create service
 	service := web.NewService(
-		web.Name("micro-go.api.base-srv"),
+		web.Name("demo.api.base-srv"),
 		web.Registry(reg),
 
 		//web.Address(":"+gt.Configger().GetString("app.port")),
@@ -39,14 +39,14 @@ func main() {
 	router := routers.Router
 	pprof.Register(router)
 	// out log to file
-	gt.Logger().DefaultFileLog()
+	log.DefaultFileLog()
 	// 注册
 	service.Handle("/", http.StripPrefix("/base-srv", router))
 	//service.Handle("/", hystrix.BreakerWrapper(http.StripPrefix("/user-srv", router)))
 
 	// Run server
 	if err := service.Run(); err != nil {
-		log.Fatal(err)
+		log.Error(err)
 	}
 }
 

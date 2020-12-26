@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/dysmsapi"
-	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/cache"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
 	"math/rand"
@@ -81,7 +81,7 @@ func Check(u *gin.Context) {
 func SendMsg(phoneNumber, templateCode, TemplateParam string) error {
 	client, err := dysmsapi.NewClientWithAccessKey("cn-hangzhou", Ak, AS)
 	if client == nil {
-		gt.Logger().Error("短信初始化client错误")
+		log.Error("短信初始化client错误")
 		return errors.New("短信初始化client错误")
 	}
 

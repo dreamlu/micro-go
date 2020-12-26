@@ -1,14 +1,15 @@
 package order
 
 import (
+	"demo/base-srv/models/admin/setup/logistic"
 	json2 "encoding/json"
 	"github.com/360EntSecGroup-Skylar/excelize/v2"
 	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/json"
 	"github.com/dreamlu/gt/tool/type/time"
 	"io"
-	"micro-go/base-srv/models/admin/setup/logistic"
 	"strconv"
 	time2 "time"
 )
@@ -43,7 +44,7 @@ type OrderShipP struct {
 func (o OrderShipP) String() string {
 	b, err := json2.Marshal(o)
 	if err != nil {
-		gt.Logger().Error(b)
+		log.Error(b)
 		return ""
 	}
 	return string(b)
@@ -80,7 +81,7 @@ func (c *Order) ShipExcel(r io.Reader) (err error) {
 		var lo logistic.Logistic
 		err = lo.GetByName(osp.CourierCompany)
 		if err != nil {
-			gt.Logger().Error("批量导入excel,查询快递公司编码问题:", err.Error())
+			log.Error("批量导入excel,查询快递公司编码问题:", err.Error())
 			continue
 		}
 		osp.Com = lo.Com
@@ -103,13 +104,13 @@ func (c *Order) ShipExcel(r io.Reader) (err error) {
 		}
 		newOr, er := or.GetByOrderNum(v.OrderNum)
 		if er != nil {
-			gt.Logger().Error("excel批量发货修改问题", er.Error())
+			log.Error("excel批量发货修改问题", er.Error())
 			continue
 		}
 		or.ID = newOr.ID
 		_, er = or.Update(&or)
 		if er != nil {
-			gt.Logger().Error("excel批量发货修改问题", er.Error())
+			log.Error("excel批量发货修改问题", er.Error())
 		}
 	}
 

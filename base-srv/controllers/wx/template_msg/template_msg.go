@@ -1,13 +1,13 @@
 package template_msg
 
 import (
-	"github.com/dreamlu/gt"
+	"demo/base-srv/controllers/wx/access_token"
+	"demo/base-srv/controllers/wx/errorcode"
+	"demo/base-srv/models/admin/applet"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/type/json"
 	json2 "gopkg.in/square/go-jose.v2/json"
 	"io/ioutil"
-	"micro-go/base-srv/controllers/wx/access_token"
-	"micro-go/base-srv/controllers/wx/errorcode"
-	"micro-go/base-srv/models/admin/applet"
 	"net/http"
 	"strings"
 )
@@ -25,7 +25,7 @@ type ModelMsg struct {
 func (m ModelMsg) String() string {
 	b, err := json2.Marshal(m)
 	if err != nil {
-		gt.Logger().Error(b)
+		log.Error(b)
 		return ""
 	}
 	return string(b)
@@ -44,20 +44,20 @@ func (m ModelMsg) Send(adminID uint64) {
 	url := "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=" + at.AccessToken
 	res, err := http.Post(url, "application/json", strings.NewReader(m.String()))
 	if err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 	var er errorcode.ErrorCode
 	_ = json2.Unmarshal(body, &er)
 	if er.Errcode != 0 {
-		gt.Logger().Error("订阅消息发送失败: ", er.String())
+		log.Error("订阅消息发送失败: ", er.String())
 		return
 	}
 	return

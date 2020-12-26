@@ -1,11 +1,11 @@
 package freight
 
 import (
+	"demo/base-srv/models/admin/setup/freight/freight_city"
+	models2 "demo/commons/models"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
-	"micro-go/base-srv/models/admin/setup/freight/freight_city"
-	models2 "micro-go/commons/models"
 )
 
 // 运费模板 模型

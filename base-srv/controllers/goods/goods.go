@@ -1,10 +1,10 @@
 package goods
 
 import (
+	"demo/base-srv/models/goods"
+	"demo/commons/util/cm"
 	"github.com/gin-gonic/gin"
 	"log"
-	"micro-go/base-srv/models/goods"
-	"micro-go/commons/util/cm"
 	"net/http"
 )
 

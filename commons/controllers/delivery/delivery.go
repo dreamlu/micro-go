@@ -4,7 +4,7 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
-	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
 	json2 "gopkg.in/square/go-jose.v2/json"
@@ -35,7 +35,7 @@ type DeliveryPar struct {
 func (d DeliveryPar) String() string {
 	b, err := json.Marshal(d)
 	if err != nil {
-		gt.Logger().Error(b)
+		log.Error(b)
 		return ""
 	}
 	return string(b)
@@ -53,7 +53,7 @@ type DeliveryCom struct {
 func (d DeliveryCom) String() string {
 	b, err := json.Marshal(d)
 	if err != nil {
-		gt.Logger().Error(b)
+		log.Error(b)
 		return ""
 	}
 	return string(b)
@@ -67,7 +67,7 @@ type Delivery struct {
 func (d Delivery) String() string {
 	b, err := json.Marshal(d)
 	if err != nil {
-		gt.Logger().Error(b)
+		log.Error(b)
 		return ""
 	}
 	return string(b)
@@ -108,17 +108,17 @@ func Find(num, com string) (r interface{}) {
 	sign := strings.ToUpper(fmt.Sprintf("%x", has)) //将[]byte转成16进制
 
 	urlParam := "customer=" + dey.Customer + "&sign=" + sign + "&param=" + param
-	gt.Logger().Info(urlParam)
+	log.Info(urlParam)
 	res, err := http.Post(url, "application/x-www-form-urlencoded", strings.NewReader(urlParam))
 	if err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 
 	defer res.Body.Close()
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 	_ = json2.Unmarshal(body, &r)

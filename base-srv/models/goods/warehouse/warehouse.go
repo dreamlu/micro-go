@@ -1,10 +1,10 @@
 package warehouse
 
 import (
+	"demo/commons/models"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
-	"micro-go/commons/models"
 )
 
 // 社群特有字段

@@ -1,15 +1,15 @@
 package main
 
 import (
+	"demo/api-gateway/wrapper/filter"
+	"demo/commons/wrapper/breaker"
 	"github.com/dreamlu/go-micro/v2"
 	"github.com/dreamlu/go-micro/v2/registry"
 	"github.com/dreamlu/go-micro/v2/registry/consul"
 	"github.com/dreamlu/go-micro/v2/wrapper/monitoring/prometheus"
-	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/conf"
 	"github.com/dreamlu/micro/v2/cmd"
 	"github.com/dreamlu/micro/v2/plugin"
-	"micro-go/api-gateway/wrapper/filter"
-	"micro-go/commons/wrapper/breaker"
 )
 
 // main.go
@@ -38,10 +38,10 @@ func main() {
 	// PrometheusBoot()
 	// registry
 	reg := consul.NewRegistry(
-		registry.Addrs(gt.Configger().GetString("app.consul.address")),
+		registry.Addrs(conf.GetString("app.consul.address")),
 	)
 	cmd.Init(
-		//micro.Name("micro-go.web.api-gateway"), // no effect
+		//micro.Name("demo.web.api-gateway"), // no effect
 		micro.WrapHandler(prometheus.NewHandlerWrapper()),
 		micro.Registry(reg),
 		//micro.Address(":"+gt.Configger().GetString("app.port")),

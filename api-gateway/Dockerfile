@@ -9,4 +9,4 @@ COPY main /
 EXPOSE 9000
 
 #CMD ["./main"]
-#CMD ["./main --api_address=0.0.0.0:9000 --registry=consul --api_namespace micro-go.web api --handler web"]
+#CMD ["./main --api_address=0.0.0.0:9000 --registry=consul --api_namespace demo.web api --handler web"]

@@ -1,15 +1,15 @@
 package wx
 
 import (
+	"demo/base-srv/models/admin/applet"
+	"demo/base-srv/models/order"
+	"demo/base-srv/models/order/order_refund"
 	"fmt"
-	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/conf"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
 	"github.com/medivhzhan/weapp/payment"
-	"log"
-	"micro-go/base-srv/models/admin/applet"
-	"micro-go/base-srv/models/order"
-	"micro-go/base-srv/models/order/order_refund"
 	"net/http"
 	"strconv"
 	"strings"
@@ -56,7 +56,7 @@ func Refund(u *gin.Context) {
 	}
 
 	refundNo := of.OutRefundNo + "-" + strconv.FormatUint(wx.OrderRefundID, 10)
-	notifyUrl := gt.Configger().GetString("app.notifyUrl") + "/refund/" + wx.PaySecret
+	notifyUrl := conf.GetString("app.notifyUrl") + "/refund/" + wx.PaySecret
 	// 新建退款订单
 	form := payment.Refunder{
 		// 必填
@@ -78,7 +78,7 @@ func Refund(u *gin.Context) {
 		u.JSON(http.StatusOK, result.CError(err))
 		return
 	}
-	log.Printf("返回结果: %#v", res)
+	log.Info("返回结果: %#v", res)
 	//err = o.EditStatus(id, 4)
 	//if err != nil {
 	//	u.JSON(http.StatusOK, result.GetMapData(500, "退款失败"))
@@ -91,7 +91,7 @@ func RefundNotify(u *gin.Context) {
 	fmt.Println("退款回调开始")
 	// 简单点,直接用secret
 	secret := u.Param("secret")
-	gt.Logger().Info("secret:", secret)
+	log.Info("secret:", secret)
 	//var wx applet.Applet
 	// applet参数查询
 	//if err := wx.GetByAdminID(admin_id); err != nil {
@@ -123,10 +123,10 @@ func RefundNotify(u *gin.Context) {
 		} else {
 			msg = status
 		}
-		gt.Logger().Error(msg)
+		log.Error(msg)
 		return false, msg
 	})
 	if err != nil {
-		gt.Logger().Error(err)
+		log.Error(err)
 	}
 }

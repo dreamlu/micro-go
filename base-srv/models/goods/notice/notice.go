@@ -1,9 +1,9 @@
 package notice
 
 import (
+	"demo/base-srv/controllers/wx/template_msg"
+	"demo/commons/models"
 	"github.com/dreamlu/gt"
-	"micro-go/base-srv/controllers/wx/template_msg"
-	"micro-go/commons/models"
 )
 
 // 社群特有字段

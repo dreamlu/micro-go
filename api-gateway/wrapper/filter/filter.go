@@ -4,10 +4,10 @@ import (
 	"crypto/md5"
 	"encoding/json"
 	"fmt"
-	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/cache"
+	"github.com/dreamlu/gt/tool/conf"
 	"github.com/dreamlu/gt/tool/result"
-	"github.com/dreamlu/gt/tool/util/str"
+	"github.com/dreamlu/gt/tool/util/cons"
 	"github.com/dreamlu/micro/v2/plugin"
 	"log"
 	"net/http"
@@ -20,7 +20,7 @@ func Filter() plugin.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 			// ip过滤
-			if gt.Configger().GetString("app.devMode") == str.Dev &&
+			if conf.GetString("app.devMode") == cons.Dev &&
 				strings.Contains(r.RemoteAddr, "127.0.0.1") {
 				// 传递下一级
 				h.ServeHTTP(w, r)

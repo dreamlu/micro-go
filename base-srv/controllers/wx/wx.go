@@ -1,20 +1,22 @@
 package wx
 
 import (
+	"demo/base-srv/controllers/wx/access_token"
+	"demo/base-srv/models/admin/applet"
+	"demo/base-srv/models/client"
+	"demo/base-srv/models/order"
+	"demo/base-srv/util/models"
 	"fmt"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/cache"
+	"github.com/dreamlu/gt/tool/conf"
 	"github.com/dreamlu/gt/tool/id"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/time"
 	"github.com/gin-gonic/gin"
 	"github.com/medivhzhan/weapp"
 	"github.com/medivhzhan/weapp/payment"
-	"micro-go/base-srv/controllers/wx/access_token"
-	"micro-go/base-srv/models/admin/applet"
-	"micro-go/base-srv/models/client"
-	"micro-go/base-srv/models/order"
-	"micro-go/base-srv/util/models"
 	"net/http"
 	time2 "time"
 )
@@ -162,7 +164,7 @@ func Pay(u *gin.Context) {
 		return
 	}
 
-	notifyUrl := gt.Configger().GetString("app.notifyUrl") + "/pay"
+	notifyUrl := conf.GetString("app.notifyUrl") + "/pay"
 	//fmt.Println("支付回调url:", notifyUrl)
 	// 新建支付订单
 	form := payment.Order{
@@ -232,7 +234,7 @@ func PayNotify(u *gin.Context) {
 		// 处理失败 return false, "失败原因..."
 	})
 	if err != nil {
-		gt.Logger().Error(err)
+		log.Error(err)
 	}
 	u.JSON(http.StatusOK, "回调处理完成")
 }

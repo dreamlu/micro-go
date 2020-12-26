@@ -1,12 +1,13 @@
 package record
 
 import (
+	models2 "demo/commons/models"
 	json2 "encoding/json"
 	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/json"
-	models2 "micro-go/commons/models"
 )
 
 // TODO 删除过久日志
@@ -64,6 +65,6 @@ func Log(ty int8, admin_id uint64, args ...interface{}) {
 	}
 	_, err := re.Create(&re)
 	if err != nil {
-		gt.Logger().Error("[日志记录错误]:", err.Error())
+		log.Error("[日志记录错误]:", err.Error())
 	}
 }

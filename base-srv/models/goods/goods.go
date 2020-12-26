@@ -1,15 +1,15 @@
 package goods
 
 import (
+	"demo/base-srv/models/goods/norm"
+	"demo/base-srv/util/cron"
+	"demo/commons/models"
 	"fmt"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/json"
 	"github.com/dreamlu/gt/tool/type/time"
-	"micro-go/base-srv/models/goods/norm"
-	"micro-go/base-srv/util/cron"
-	"micro-go/commons/models"
 )
 
 // 商品模型

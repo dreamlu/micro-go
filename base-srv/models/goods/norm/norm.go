@@ -1,8 +1,9 @@
 package norm
 
 import (
+	models2 "demo/commons/models"
 	"github.com/dreamlu/gt"
-	models2 "micro-go/commons/models"
+	"github.com/dreamlu/gt/tool/log"
 )
 
 // 商品规格值
@@ -56,7 +57,7 @@ func CreateAndUpdate(cd gt.Crud, goods_id uint64, data []*GsNormPar) error {
 	if goods_id != 0 {
 		err := crud.Select("delete from gs_norm where goods_id = ?", goods_id).Exec().Error()
 		if err != nil {
-			gt.Logger().Error(err.Error())
+			log.Error(err.Error())
 			// 继续执行
 		}
 	}

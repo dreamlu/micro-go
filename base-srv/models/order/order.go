@@ -1,18 +1,19 @@
 package order
 
 import (
+	"demo/base-srv/models/goods"
+	"demo/base-srv/models/record"
+	"demo/base-srv/util/cons"
+	models2 "demo/commons/models"
 	"fmt"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/cache"
 	"github.com/dreamlu/gt/tool/id"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/json"
 	"github.com/dreamlu/gt/tool/type/time"
-	"micro-go/base-srv/models/goods"
-	"micro-go/base-srv/models/record"
-	"micro-go/base-srv/util/cons"
-	models2 "micro-go/commons/models"
 	"strconv"
 	time2 "time"
 )
@@ -57,13 +58,13 @@ var crud = gt.NewCrud(
 
 func (c *Order) GetByOrderNum(orderNum string) (data Order, err error) {
 
-	gt.Logger().Info("[根据outTradeNo批量查询订单]")
+	log.Info("[根据outTradeNo批量查询订单]")
 	var params = cmap.CMap{}
 	params.Add("`order_num`", orderNum)
 	crud2 := gt.NewCrud()
 	crud2.Params(gt.Model(Order{}), gt.Table("order"), gt.Data(&data))
 	if err = crud2.GetByData(params).Error(); err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 	return
@@ -71,13 +72,13 @@ func (c *Order) GetByOrderNum(orderNum string) (data Order, err error) {
 
 func (c *Order) GetByOutTradeNo(outTradeNo string) (datas []*Order, err error) {
 
-	gt.Logger().Info("[根据outTradeNo批量查询订单]")
+	log.Info("[根据outTradeNo批量查询订单]")
 	var params = cmap.CMap{}
 	params.Add("`out_trade_no`", outTradeNo)
 	crud := gt.NewCrud()
 	crud.Params(gt.Model(Order{}), gt.Table("order"), gt.Data(&datas))
 	if err = crud.GetByData(params).Error(); err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 	return
@@ -209,7 +210,7 @@ func (c *Order) UpdateNotify(data *Order) (err error) {
 //	for _, v := range datas {
 //		_, err := c.Update(v)
 //		if err != nil {
-//			gt.Logger().Error("[订单批量修改错误]", err.Error())
+//			log.Error("[订单批量修改错误]", err.Error())
 //		}
 //	}
 //	return nil
@@ -389,7 +390,7 @@ func createCom(cd gt.Crud, data *Order) (*Order, error) {
 	)
 	if err := cd.Create().Error(); err != nil {
 		cd.DB().Rollback()
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return nil, err
 	}
 	return data, nil

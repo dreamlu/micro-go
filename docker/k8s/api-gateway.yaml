@@ -31,7 +31,7 @@ spec:
             - --api_address=0.0.0.0:9000
             - --registry_address=consul
             - --registry=consul
-            - --api_namespace=micro-go.web
+            - --api_namespace=demo.api
             - api
             - --handler=web
           name: api-gateway-dep

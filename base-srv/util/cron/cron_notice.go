@@ -1,12 +1,13 @@
 package cron
 
 import (
+	"demo/base-srv/models/goods/notice"
 	"fmt"
 	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/time"
 	"github.com/robfig/cron/v3"
-	"micro-go/base-srv/models/goods/notice"
 	time2 "time"
 )
 
@@ -29,7 +30,7 @@ func CTimeCron(t time.CTime) (rs string) {
 func CronNotice(t time.CTime) {
 	c := cron.New(cron.WithSeconds())
 	_, _ = c.AddFunc(CTimeCron(t), NoticeInfo)
-	gt.Logger().Info(CTimeCron(t))
+	log.Info(CTimeCron(t))
 	c.Start()
 }
 
@@ -51,7 +52,7 @@ func NoticeInfo() {
 		gt.SubWhereSQL(whereSQL),
 	).GetMoreBySearch(params)
 	if cd.Error() != nil {
-		gt.Logger().Error(cd.Error().Error())
+		log.Error(cd.Error().Error())
 		return
 	}
 
@@ -70,11 +71,11 @@ func NoticeInfo() {
 	}
 
 	// 修改状态
-	gt.Logger().Info("[商品id]:", goodsIDS)
+	log.Info("[商品id]:", goodsIDS)
 	for _, v := range goodsIDS {
 		err := gt.NewCrud().Select("update gs_notice set status = 1 where goods_id = ?", v).Exec()
 		if err != nil {
-			gt.Logger().Error(err.Error())
+			log.Error(err.Error())
 		}
 	}
 

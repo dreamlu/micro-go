@@ -1,11 +1,11 @@
 package regroup
 
 import (
+	"demo/commons/models"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/time"
-	"micro-go/commons/models"
 )
 
 // 社群特有字段

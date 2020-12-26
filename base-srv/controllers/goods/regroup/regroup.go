@@ -1,10 +1,10 @@
 package regroup
 
 import (
+	"demo/base-srv/models/goods/regroup"
+	"demo/commons/util/cm"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/gin-gonic/gin"
-	"micro-go/base-srv/models/goods/regroup"
-	"micro-go/commons/util/cm"
 	"net/http"
 )
 

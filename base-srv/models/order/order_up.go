@@ -1,11 +1,12 @@
 package order
 
 import (
+	"demo/base-srv/models/record"
+	"demo/base-srv/util/cons"
 	"github.com/dreamlu/gt"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/time"
-	"micro-go/base-srv/models/record"
-	"micro-go/base-srv/util/cons"
 	time2 "time"
 )
 
@@ -47,7 +48,7 @@ func addGoodsBuyNum(cd gt.Crud, data *Order) {
 	// 该笔订单下所有购买的商品
 	gs, err := data.GetGoods(data.ID)
 	if err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 

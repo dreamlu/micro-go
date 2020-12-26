@@ -1,12 +1,11 @@
 package cron
 
 import (
-	"github.com/dreamlu/gt"
+	"demo/base-srv/controllers/module/live_bro"
+	"demo/base-srv/controllers/wx/access_token"
+	"demo/base-srv/models/admin/applet"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/type/cmap"
-	"log"
-	"micro-go/base-srv/controllers/module/live_bro"
-	"micro-go/base-srv/controllers/wx/access_token"
-	"micro-go/base-srv/models/admin/applet"
 	"time"
 )
 
@@ -41,7 +40,7 @@ func cronLive() {
 	)
 	datas, _, err := wx.GetBySearch(param)
 	if err != nil {
-		gt.Logger().Error(err.Error())
+		log.Error(err.Error())
 		return
 	}
 	flushLive(datas)
@@ -49,7 +48,7 @@ func cronLive() {
 	// 5分钟执行一次
 	for range time.Tick(time.Minute * 5) {
 		go flushLive(datas)
-		log.Println("[开始小程序直播列表数据刷新]")
+		log.Info("[开始小程序直播列表数据刷新]")
 	}
 }
 
@@ -67,11 +66,11 @@ func flushLive(datas []*applet.Applet) {
 		lb.Applet = v
 		es, err := live_bro.FlushData(lb)
 		if err != nil {
-			gt.Logger().Error("[err刷新直播的appid:]", v.Appid, err.Error())
+			log.Error("[err刷新直播的appid:]", v.Appid, err.Error())
 			return
 		}
 		if es.Errcode != 0 {
-			gt.Logger().Error("[err刷新直播的appid:]", v.Appid, es)
+			log.Error("[err刷新直播的appid:]", v.Appid, es)
 			return
 		}
 	}

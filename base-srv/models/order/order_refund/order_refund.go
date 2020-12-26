@@ -1,14 +1,15 @@
 package order_refund
 
 import (
+	"demo/base-srv/models/order"
+	models2 "demo/commons/models"
 	"fmt"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/id"
+	"github.com/dreamlu/gt/tool/log"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/json"
-	"micro-go/base-srv/models/order"
-	models2 "micro-go/commons/models"
 )
 
 // 订单退款模型
@@ -148,7 +149,7 @@ func (c OrderRefund) Update(data *OrderRefund) (err error) {
 		}
 		//fmt.Println("orderRefund之后数据: ", c)
 		if err = cd.Select("update `order_goods` set status = ? where id = ?", data.Status, c.OrderGoodsID).Exec().Error(); err != nil {
-			gt.Logger().Error(err)
+			log.Error(err)
 			cd.Rollback()
 			return
 		}
@@ -171,21 +172,21 @@ func (c OrderRefund) Update(data *OrderRefund) (err error) {
 			ids = append(ids, v.ID)
 		}
 
-		gt.Logger().Info("[退款申请通过的ids]:", ids)
+		log.Info("[退款申请通过的ids]:", ids)
 		var num Num
 		cd2 := gt.NewCrud(gt.Data(&num)).Select("select count(*) num from `order_refund` where order_goods_id in (?) and status = 4", ids).Single()
 		if cd2.Error() != nil {
-			gt.Logger().Error("[订单退款申请判断是否全部通过问题]:", cd2.Error())
+			log.Error("[订单退款申请判断是否全部通过问题]:", cd2.Error())
 			cd.Rollback()
 			return cd2.Error()
 		}
-		gt.Logger().Info("[退款申请通过的行数]:", num.Num)
+		log.Info("[退款申请通过的行数]:", num.Num)
 		// 都退款通过
 		if num.Num == len(ids)-1 { // 事务查询影响 - 1
-			gt.Logger().Info("[修改订单整体退款状态,订单id]:", c.OrderID)
+			log.Info("[修改订单整体退款状态,订单id]:", c.OrderID)
 			db := cd.DB().Exec("update `order` set status = 4 where id = ?", c.OrderID)
 			if db.Error != nil {
-				gt.Logger().Error(db.Error)
+				log.Error(db.Error)
 				cd.Rollback()
 				return db.Error
 			}

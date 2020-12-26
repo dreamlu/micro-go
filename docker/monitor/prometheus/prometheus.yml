@@ -15,6 +15,8 @@ alerting:
 rule_files:
   - "node_down.yml"
   - "memory_over.yml"
+  - "disk_over.yml"
+  - "network_over.yml"
   # - "first_rules.yml"
   # - "second_rules.yml"
 
@@ -34,3 +36,8 @@ scrape_configs:
     scrape_interval: 8s
     static_configs:
       - targets: ['node-exporter:9100']
+
+#  - job_name: 'consul'
+#    scrape_interval: 8s
+#    static_configs:
+#      - targets: ['consul:8500']

@@ -1,10 +1,10 @@
 package logistic
 
 import (
+	models2 "demo/commons/models"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
-	models2 "micro-go/commons/models"
 )
 
 // 物流公司模型

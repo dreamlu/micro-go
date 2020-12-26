@@ -1,9 +1,9 @@
 package carousel
 
 import (
+	models2 "demo/commons/models"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
-	models2 "micro-go/commons/models"
 )
 
 // 轮播图模型

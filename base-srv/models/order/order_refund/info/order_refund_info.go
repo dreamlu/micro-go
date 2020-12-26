@@ -1,11 +1,11 @@
 package info
 
 import (
+	"demo/commons/models"
 	"github.com/dreamlu/gt"
 	"github.com/dreamlu/gt/tool/result"
 	"github.com/dreamlu/gt/tool/type/cmap"
 	"github.com/dreamlu/gt/tool/type/json"
-	"micro-go/commons/models"
 )
 
 // 订单申请退款--已收到货 模型
